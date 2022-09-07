@@ -1,7 +1,7 @@
 
 import './App.css';
 import {useState, useEffect} from 'react';
-import {accessToken} from './spotify';
+import {accessToken, logout} from './spotify';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -19,7 +19,11 @@ function App() {
           Log in to spotify
         </a>
         ) : (
-          <h1>Logged in!</h1>
+          <>
+            <h1>Logged in!</h1>
+            <button onClick={logout}>Log Out</button>
+          </>
+          
         )}
       </header>
     </div>
