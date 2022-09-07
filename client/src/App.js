@@ -9,6 +9,13 @@ function App() {
     const accessToken = urlParams.get('access_token');
     const refreshToken = urlParams.get('refresh_token');
 
+    if (refreshToken) {
+      fetch(`/refresh_token?refresh_token=${refreshToken}`)
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
+    }
+
   }, []);
   return (
     <div className="App">
