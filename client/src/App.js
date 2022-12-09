@@ -3,6 +3,13 @@ import './App.css';
 import {useState, useEffect} from 'react';
 import {accessToken, logout, getCurrentUserProfile} from './spotify';
 import {catchErrors} from "./utils";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+
 
 function App() {
   const [token, setToken] = useState(null);
@@ -27,25 +34,42 @@ function App() {
         {!token ? (
           <a
           className="App-link"
-          href="http://localhost:8888/login">
+          href="http://localhost:8888/login"
+          >
           Log in to spotify
         </a>
         ) : (
-          <>
-            <h1>Logged in!</h1>
-            <button onClick={logout}>Log Out</button>
-
-              {profile && (
-                  <>
-                      <h1>{profile.display_name}</h1>
-                      <p>{profile.followers.total} Followers</p>
-                      {profile.images.length && profile.images[0].url && (
-                          <img src ={profile.images[0].url} alt="Avatar" />
-                      )}
-                  </>
-
-              )}
-          </>
+          <Router>
+            <Routes>
+              <Route path="/top-artists">
+                <h1>Top Artists</h1>
+              </Route>
+              <Route path="/top-tracks">
+                <h1>Top Tracks</h1>
+              </Route>
+              <Route path="/playlists/:id">
+                <h1>Playlist</h1>
+              </Route>
+              <Route path="/playlists">
+                <h1>Playlists</h1>
+              </Route>
+              <Route path="/">
+                <>
+                <button onClick={logout}>LogOut</button>
+                
+                {profile && (
+                  <div>
+                  <h1>{profile.ddisplay_name}</h1>
+                  <p>{profile.followers.total} Followers</p>
+                  {profile.images.lenth && profile.images[0].url && (
+                    <img src={profile.images[0].url} alt="Avatar"/> 
+                )};
+                </div>
+                )}
+                </>
+              </Route>
+            </Routes>
+          </Router>
           
         )}
       </header>
