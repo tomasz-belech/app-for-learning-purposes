@@ -7,8 +7,18 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
+  useLocation
 } from "react-router-dom";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 
 function App() {
@@ -31,46 +41,37 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {!token ? (
-          <a
-          className="App-link"
-          href="http://localhost:8888/login"
-          >
-          Log in to spotify
-        </a>
+      {!token ? (
+        <>
+          <a className="App-link" href="http://localhost:8888/login">
+            Log in to Spotify
+          </a> </>
         ) : (
           <Router>
+            <ScrollToTop />
             <Routes>
-              <Route path="/top-artists">
-                <h1>Top Artists</h1>
+              <Route path="/top-artists" element={<h1>Top Artists</h1>}>
               </Route>
-              <Route path="/top-tracks">
-                <h1>Top Tracks</h1>
+              <Route path="/top-tracks" element={<h1>Top Tracks</h1>}>
               </Route>
-              <Route path="/playlists/:id">
-                <h1>Playlist</h1>
+              <Route path="/playlists/:id" element={<h1>Playlist</h1>}>
               </Route>
-              <Route path="/playlists">
-                <h1>Playlists</h1>
+              <Route path="/playlists" element={<h1>Playlists</h1>}>
               </Route>
-              <Route path="/">
-                <>
-                <button onClick={logout}>LogOut</button>
-                
+              <Route path="/" element={<div><button onClick={logout}>Log Out</button>
+
                 {profile && (
                   <div>
-                  <h1>{profile.ddisplay_name}</h1>
-                  <p>{profile.followers.total} Followers</p>
-                  {profile.images.lenth && profile.images[0].url && (
-                    <img src={profile.images[0].url} alt="Avatar"/> 
-                )};
-                </div>
-                )}
-                </>
+                    <h1>{profile.display_name}</h1>
+                    <p>{profile.followers.total} Followers</p>
+                    {profile.images.length && profile.images[0].url && (
+                      <img src={profile.images[0].url} alt="Avatar"/>
+                    )}
+                  </div>
+                )}</div>}>
               </Route>
             </Routes>
           </Router>
-          
         )}
       </header>
     </div>
