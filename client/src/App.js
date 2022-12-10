@@ -1,5 +1,4 @@
 
-import './App.css';
 import {useState, useEffect} from 'react';
 import {accessToken, logout, getCurrentUserProfile} from './spotify';
 import {catchErrors} from "./utils";
@@ -9,6 +8,16 @@ import {
   Route,
   useLocation
 } from "react-router-dom";
+import styled from 'styled-components/macro';
+import GlobalStyle from './styles/GlobalStyle';
+
+const StyledLoginButton = styled.a`
+background-color: var(--green);
+color: var(--white);
+padding: 10px 20px;
+border-radius: 30px;
+display: inline-block;
+`;
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -40,12 +49,16 @@ function App() {
 
   return (
     <div className="App">
+      <GlobalStyle />
+
       <header className="App-header">
       {!token ? (
-        <>
-          <a className="App-link" href="http://localhost:8888/login">
-            Log in to Spotify
-          </a> </>
+        <StyledLoginButton
+           href="http://localhost:8888/login"
+          >
+          Log in to Spotify
+          </StyledLoginButton>
+        
         ) : (
           <Router>
             <ScrollToTop />
@@ -59,7 +72,6 @@ function App() {
               <Route path="/playlists" element={<h1>Playlists</h1>}>
               </Route>
               <Route path="/" element={<div><button onClick={logout}>Log Out</button>
-
                 {profile && (
                   <div>
                     <h1>{profile.display_name}</h1>
