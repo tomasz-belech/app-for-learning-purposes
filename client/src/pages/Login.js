@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import { Login, Profile, TopArtists, TopTracks } from './';
 
 const StyledLoginContainer = styled.main`
   display: flex;
@@ -24,7 +25,7 @@ const StyledLoginButton = styled.a`
   }
 `;
 
-const Login = () => (
+const Login1 = () => (
   <StyledLoginContainer>
     <StyledLoginButton href="http://localhost:8888/login">
       Log in to Spotify
@@ -32,4 +33,4 @@ const Login = () => (
   </StyledLoginContainer>
 );
 
-export default Login;
+export default Login1;
