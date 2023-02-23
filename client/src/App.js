@@ -9,7 +9,7 @@ import {
   useLocation
 } from "react-router-dom";
 import GlobalStyle from './styles/GlobalStyle';
-import {Login, Profile, TopArtists} from './pages';
+import { Login, Profile, TopArtists, TopTracks, Playlists } from './pages';
 import styled from 'styled-components/macro';
 
 const StyledLogoutButton = styled.button`
@@ -74,11 +74,11 @@ function App() {
             <Routes>
               <Route path="/top-artists" element={<TopArtists />}>
               </Route>
-              <Route path="/top-tracks" element={<h1>Top Tracks</h1>}>
+              <Route path="/top-tracks" element={<TopTracks />}>
               </Route>
               <Route path="/playlists/:id" element={<h1>Playlist</h1>}>
               </Route>
-              <Route path="/playlists" element={<h1>Playlists</h1>}>
+              <Route path="/playlists" element={<Playlists />}>
               </Route>
               <Route path="/" element={<Profile />}>
               </Route>
